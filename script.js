@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculatePotOdds(betSize, potSize) {
     if (!isFinite(betSize) || !isFinite(potSize) || betSize < 0 || potSize < 0)
       return 0;
-    const denom = potSize + betSize;
+    const denom = potSize + 2 * betSize;
     return denom > 0 ? betSize / denom : 0;
   }
 
