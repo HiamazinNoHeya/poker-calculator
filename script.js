@@ -4,29 +4,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const $ = (id) => document.getElementById(id);
 
   // --- Core formulas ---
-  function calculatePotOdds(betSize, potSize) {
-    if (!isFinite(betSize) || !isFinite(potSize) || betSize < 0 || potSize < 0)
-      return 0;
-    const denom = potSize + 2 * betSize;
-    return denom > 0 ? betSize / denom : 0;
+  // betPct: ベットサイズ（%）をpot=100基準で計算
+  function calculatePotOdds(betPct) {
+    const bet = betPct;
+    const pot = 100;
+    const denom = pot + 2 * bet;
+    return denom > 0 ? bet / denom : 0;
   }
 
-  function calculateAlpha(betSize, potSize) {
-    if (!isFinite(betSize) || !isFinite(potSize) || betSize < 0 || potSize < 0)
-      return 0;
-    const denom = potSize + betSize;
-    return denom > 0 ? betSize / denom : 0;
+  function calculateAlpha(betPct) {
+    const bet = betPct;
+    const pot = 100;
+    const denom = pot + bet;
+    return denom > 0 ? bet / denom : 0;
   }
 
-  function calculateMDF(betSize, potSize) {
-    if (!isFinite(betSize) || !isFinite(potSize) || betSize < 0 || potSize < 0)
-      return 0;
-    const denom = potSize + betSize;
-    return denom > 0 ? potSize / denom : 0;
+  function calculateMDF(betPct) {
+    const bet = betPct;
+    const pot = 100;
+    const denom = pot + bet;
+    return denom > 0 ? pot / denom : 0;
   }
 
   // --- Elements ---
-  const potInput = $("potInput");
   const betInput = $("betInput");
   const potOddsOut = $("potOddsOut");
   const alphaOut = $("alphaOut");
@@ -44,18 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function computeAndRender() {
-    const pot = num(potInput);
-    const bet = num(betInput);
+    const betPct = num(betInput);
 
-    const potOdds = calculatePotOdds(bet, pot);
-    const alpha = calculateAlpha(bet, pot);
-    const mdf = calculateMDF(bet, pot);
-    const sqrtAlphaMDF = 1 - Math.sqrt(alpha);
+    const potOdds = calculatePotOdds(betPct);
+    const alpha = calculateAlpha(betPct);
+    const mdf = calculateMDF(betPct);
+    const sqrtAlpha = Math.sqrt(alpha);
+    const sqrtAlphaMDF = 1 - sqrtAlpha;
 
     potOddsOut.textContent = pct(potOdds);
     alphaOut.textContent = pct(alpha);
     mdfOut.textContent = pct(mdf);
-    sqrtAlphaOut.textContent = pct(Math.sqrt(alpha));
+    sqrtAlphaOut.textContent = pct(sqrtAlpha);
     sqrtAlphaMDFOut.textContent = pct(sqrtAlphaMDF);
     valueBluffRatioOut.textContent = `${pct(1 - potOdds)} : ${pct(potOdds)}`;
   }
@@ -64,13 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
   computeAndRender();
 
   // Events
-  [potInput, betInput].forEach((el) =>
-    el.addEventListener("input", computeAndRender)
-  );
+  betInput.addEventListener("input", computeAndRender);
 
   resetBtn.addEventListener("click", () => {
-    potInput.value = "150";
-    betInput.value = "100";
+    betInput.value = "66";
     computeAndRender();
   });
 });
