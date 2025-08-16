@@ -1,0 +1,144 @@
+:root {
+  --max-width: 920px;
+  --color-border: #d1d5db;
+  --color-bg: #f9fafb;
+  --color-card-bg: #ffffff;
+  --color-primary: #2563eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  margin: 0;
+  padding: 24px;
+  line-height: 1.6;
+  background: var(--color-bg);
+}
+
+header h1 {
+  margin: 0 0 8px;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 16px auto;
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input-prefix {
+  display: flex;
+  align-items: stretch;
+}
+
+.prefix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  background: var(--color-bg);
+  font-size: 18px;
+}
+
+input[type="number"] {
+  flex: 1;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 0 10px 10px 0;
+  font-size: 20px;
+  background: #fff;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.actions {
+  margin-top: 12px;
+}
+
+button {
+  padding: 12px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #e5e7eb;
+}
+
+.results .grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* spacing between rows */
+}
+
+.results .grid .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* items spread horizontally */
+  gap: 16px; /* spacing between items, 少し狭く */
+}
+
+.results .grid .row .item {
+  flex: 1 1 32%; /* 3段構成に */
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.row {
+  display: flex;
+  gap: 100px;
+}
+
+.big {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.note ul {
+  margin: 0 0 0 18px;
+}
+
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  text-align: center;
+}

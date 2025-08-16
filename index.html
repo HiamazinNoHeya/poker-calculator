@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poker Calculator — α / MDF / Pot Odds</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Poker Calculator</h1>
+      <p>
+        ポットオッズ、α（ブラフ頻度しきい値）、MDF（最小ディフェンス頻度）を即時計算
+      </p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>入力</h2>
+        <form id="calcForm">
+          <div class="field">
+            <label for="potInput">ポットサイズ</label>
+            <div class="input-prefix">
+              <span class="prefix">$</span>
+              <input
+                id="potInput"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.01"
+                placeholder="例: 150"
+                value="6"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label for="betInput">ベット額</label>
+            <div class="input-prefix">
+              <span class="prefix">$</span>
+              <input
+                id="betInput"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.01"
+                placeholder="例: 100"
+                value="4"
+              />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="resetBtn" type="button">初期化</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card results">
+        <h2>結果</h2>
+        <div class="results-rows">
+          <div class="row">
+            <div class="item">
+              <h3>ポットオッズ</h3>
+              <p class="big"><span id="potOddsOut">—</span></p>
+              <small>式：bet / (pot + bet)</small>
+            </div>
+            <div class="item">
+              <h3>value / bluff 比</h3>
+              <p class="big"><span id="valueBluffRatioOut">—</span></p>
+              <small>式：value% : bluff%</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <h3>α</h3>
+              <p class="big"><span id="alphaOut">—</span></p>
+              <small>式：bet / (pot + bet)</small>
+            </div>
+            <div class="item">
+              <h3>MDF</h3>
+              <p class="big"><span id="mdfOut">—</span></p>
+              <small>式：pot / (pot + bet) = 1 - α</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <h3>√α</h3>
+              <p class="big"><span id="sqrtAlphaOut">—</span></p>
+              <small>式：√α</small>
+            </div>
+            <div class="item">
+              <h3>√αのMDF</h3>
+              <p class="big"><span id="sqrtAlphaMDFOut">—</span></p>
+              <small>式：1 - √α</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card note">
+        <h2>メモ</h2>
+        <ul>
+          <li>ポットオッズは「コールが利益0になるために必要な勝率」。</li>
+          <li>
+            αは相手が<strong>最適にブラフできる上限割合</strong>の指標。MDFはこちらが<strong>降りすぎないための最低防衛率</strong>。
+          </li>
+          <li>単位はすべて同じ通貨でOK（$や¥が混在しなければ良い）。</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>© Poker Calculator</small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
