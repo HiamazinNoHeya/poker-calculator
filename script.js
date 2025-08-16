@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const sqrtAlphaOut = $("sqrtAlphaOut");
   const sqrtAlphaMDFOut = $("sqrtAlphaMDFOut");
   const valueBluffRatioOut = $("valueBluffRatioOut");
-  const resetBtn = $("resetBtn");
 
   // --- Helpers ---
   const pct = (x) => `${(x * 100).toFixed(2)}%`;
@@ -51,23 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const mdf = calculateMDF(betPct);
     const sqrtAlpha = Math.sqrt(alpha);
     const sqrtAlphaMDF = 1 - sqrtAlpha;
+    const valueRatio = ((1 - potOdds) * 100).toFixed(0);
+    const bluffRatio = (potOdds * 100).toFixed(0);
 
     potOddsOut.textContent = pct(potOdds);
     alphaOut.textContent = pct(alpha);
     mdfOut.textContent = pct(mdf);
     sqrtAlphaOut.textContent = pct(sqrtAlpha);
     sqrtAlphaMDFOut.textContent = pct(sqrtAlphaMDF);
-    valueBluffRatioOut.textContent = `${pct(1 - potOdds)} : ${pct(potOdds)}`;
+    valueBluffRatioOut.textContent = `${valueRatio}:${bluffRatio}`;
   }
-
   // Init
   computeAndRender();
-
   // Events
   betInput.addEventListener("input", computeAndRender);
-
-  resetBtn.addEventListener("click", () => {
-    betInput.value = "66";
-    computeAndRender();
-  });
 });
